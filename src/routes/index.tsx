@@ -1,29 +1,46 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Layout } from "../components/Layout";
+import { Hero } from "../components/sections/Hero";
+import { About } from "../components/sections/About";
+import { Schedule } from "../components/sections/Schedule";
+import { Speakers } from "../components/sections/Speakers";
+import { Committee } from "../components/sections/Committee";
+import { Topics } from "../components/sections/Topics";
+import { Registration } from "../components/sections/Registration";
+import { Documents } from "../components/sections/Documents";
+import { Venue } from "../components/sections/Venue";
+import { Gallery } from "../components/sections/Gallery";
+import { Sponsors } from "../components/sections/Sponsors";
+import { ContactSection } from "../components/sections/Contact";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Your App" },
-      { name: "description", content: "Replace this with a one-sentence description of your app." },
-      { property: "og:title", content: "Your App" },
-      { property: "og:description", content: "Replace this with a one-sentence description of your app." },
+      { title: "PLASMA 2025 | International Symposium on Plasma Science & Technology" },
+      { name: "description", content: "PLASMA 2025 — International Symposium on Plasma Science & Technology. Nov 14–16, 2025 at St. Joseph's University, Bengaluru. 500+ delegates from 40+ countries." },
+      { property: "og:title", content: "PLASMA 2025 | International Symposium on Plasma Science & Technology" },
+      { property: "og:description", content: "Join 500+ delegates from 40+ countries at St. Joseph's University, Bengaluru, Nov 14–16, 2025." },
+      { property: "og:type", content: "website" },
     ],
   }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+    <Layout>
+      <Hero />
+      <About />
+      <Schedule />
+      <Speakers />
+      <Committee />
+      <Topics />
+      <Registration />
+      <Documents />
+      <Venue />
+      <Gallery />
+      <Sponsors />
+      <ContactSection />
+    </Layout>
   );
 }
