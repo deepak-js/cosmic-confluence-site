@@ -215,7 +215,7 @@
   50% { opacity: 1; }
 }
 
-.drift-a { animation: drift-a 18s ease-in-out infinite alternate; }
-.drift-b { animation: drift-b 22s ease-in-out infinite alternate; }
-.neb-pulse { animation: neb-pulse 25s ease-in-out infinite; }
+.drift-a { animation: drift-a 9s ease-in-out infinite alternate; }
+.drift-b { animation: drift-b 11s ease-in-out infinite alternate; }
+.neb-pulse { animation: neb-pulse 14s ease-in-out infinite; }
 .pulse-soft { animation: pulse-soft 2s ease-in-out infinite; }
