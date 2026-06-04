@@ -184,15 +184,15 @@
 }
 @keyframes drift-a {
   0%,100% { transform: translate(0,0) scale(1); }
-  50% { transform: translate(60px,-40px) scale(1.1); }
+  50% { transform: translate(110px,-80px) scale(1.18); }
 }
 @keyframes drift-b {
   0%,100% { transform: translate(0,0) scale(1.05); }
-  50% { transform: translate(-50px,30px) scale(0.95); }
+  50% { transform: translate(-100px,60px) scale(0.9); }
 }
 @keyframes neb-pulse {
   0%,100% { transform: scale(1); }
-  50% { transform: scale(1.06); }
+  50% { transform: scale(1.09); }
 }
 @keyframes scanline {
   0% { transform: translateY(-2px); opacity: 1; }
@@ -215,7 +215,7 @@
   50% { opacity: 1; }
 }
 
-.drift-a { animation: drift-a 18s ease-in-out infinite alternate; }
-.drift-b { animation: drift-b 22s ease-in-out infinite alternate; }
-.neb-pulse { animation: neb-pulse 25s ease-in-out infinite; }
+.drift-a { animation: drift-a 9s ease-in-out infinite alternate; }
+.drift-b { animation: drift-b 11s ease-in-out infinite alternate; }
+.neb-pulse { animation: neb-pulse 14s ease-in-out infinite; }
 .pulse-soft { animation: pulse-soft 2s ease-in-out infinite; }
