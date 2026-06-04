@@ -3,7 +3,7 @@ import { useEffect, useState, useRef } from "react";
 import { ArrowRight } from "lucide-react";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
-const TARGET = new Date("2025-11-14T09:00:00+05:30").getTime();
+const TARGET = new Date("2026-11-16T09:00:00+05:30").getTime();
 
 // 60 static particles
 const PARTICLES = Array.from({ length: 60 }).map((_, i) => ({
