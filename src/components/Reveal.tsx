@@ -1,6 +1,8 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, type ReactNode } from "react";
 
+const EASE = [0.22, 1, 0.36, 1] as const;
+
 export function Reveal({
   children,
   delay = 0,
@@ -19,7 +21,7 @@ export function Reveal({
       ref={ref}
       initial={{ opacity: 0, y }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.7, delay, ease: [0.21, 0.47, 0.32, 0.98] }}
+      transition={{ duration: 0.8, delay, ease: EASE }}
       className={className}
     >
       {children}
@@ -38,17 +40,37 @@ export function SectionHeader({
   subtitle?: string;
   center?: boolean;
 }) {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-80px" });
   return (
-    <Reveal className={center ? "text-center max-w-3xl mx-auto" : "max-w-3xl"}>
+    <div ref={ref} className={center ? "text-center max-w-3xl mx-auto" : "max-w-3xl"}>
       {eyebrow && (
-        <div className="inline-block text-xs uppercase tracking-[0.3em] text-cyan mb-4">{eyebrow}</div>
+        <div className="font-mono text-[11px] tracking-[0.25em] uppercase text-muted-foreground mb-5 flex items-center gap-3">
+          <span className="inline-block h-px w-8 bg-gradient-to-r from-violet to-cyan" />
+          {eyebrow}
+        </div>
       )}
-      <h2 className="font-display font-bold text-4xl md:text-5xl lg:text-6xl leading-[1.05]">
+      <motion.h2
+        initial={{ clipPath: "inset(0 100% 0 0)" }}
+        animate={inView ? { clipPath: "inset(0 0% 0 0)" } : {}}
+        transition={{ duration: 1, ease: EASE }}
+        className="font-display font-black text-4xl md:text-5xl lg:text-6xl leading-[1.02] tracking-tight"
+      >
         {title}
-      </h2>
+      </motion.h2>
       {subtitle && (
-        <p className="mt-5 text-base md:text-lg text-muted-foreground leading-relaxed">{subtitle}</p>
+        <Reveal delay={0.2}>
+          <p className="mt-5 text-base md:text-lg text-muted-foreground leading-relaxed">{subtitle}</p>
+        </Reveal>
       )}
-    </Reveal>
+    </div>
+  );
+}
+
+export function GhostNumber({ n }: { n: string }) {
+  return (
+    <span aria-hidden className="ghost-num top-0 right-4 md:right-8">
+      {n}
+    </span>
   );
 }
