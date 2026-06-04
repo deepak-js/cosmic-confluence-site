@@ -32,15 +32,15 @@ function useCountdown() {
 
 function Digit({ value }: { value: string }) {
   return (
-    <span className="relative inline-block overflow-hidden h-[1em] w-[0.62em] align-baseline">
+    <span className="relative inline-block overflow-hidden h-[1em]" style={{ width: "0.65em" }}>
       <AnimatePresence mode="popLayout" initial={false}>
         <motion.span
           key={value}
-          initial={{ y: "120%" }}
+          initial={{ y: "110%" }}
           animate={{ y: "0%" }}
-          exit={{ y: "-120%" }}
-          transition={{ duration: 0.35, ease: EASE }}
-          className="absolute inset-0 tabular-nums"
+          exit={{ y: "-110%" }}
+          transition={{ duration: 0.4, ease: EASE }}
+          className="absolute inset-0 flex items-start justify-center tabular-nums leading-none"
         >
           {value}
         </motion.span>
@@ -53,7 +53,7 @@ function CountUnit({ value, label }: { value: number; label: string }) {
   const v = String(value).padStart(2, "0");
   return (
     <div className="flex-1 px-3 md:px-6">
-      <div className="font-display font-bold text-gradient tabular-nums leading-none flex" style={{ fontSize: "clamp(52px,8vw,96px)" }}>
+      <div className="font-display font-bold text-gradient tabular-nums leading-none flex items-start" style={{ fontSize: "clamp(52px,8vw,96px)" }}>
         <Digit value={v[0]} />
         <Digit value={v[1]} />
       </div>
