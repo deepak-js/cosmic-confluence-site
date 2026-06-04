@@ -57,7 +57,7 @@ export function Footer() {
         </div>
         <div className="mt-12 pt-6 border-t border-white/[0.06] flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-tertiary font-mono">
           <p>© 2025 PLASMA Symposium · St. Joseph's University, Bengaluru</p>
-          <p>Made with <span className="text-plasma">♥</span> by Department of Physics</p>
+          <p>Powered by <span className="text-plasma font-bold">heisenlabs.cloud</span></p>
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
             className="inline-flex items-center gap-2 px-3 py-2 rounded-full glass hover:border-glow"

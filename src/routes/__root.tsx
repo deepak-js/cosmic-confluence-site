@@ -92,7 +92,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         rel: "icon",
         type: "image/svg+xml",
-        href: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0%25' stop-color='%2322D3EE'/><stop offset='100%25' stop-color='%23E879F9'/></linearGradient></defs><path d='M16 2C16 2 22 8 22 14C22 18 19 20 19 23C19 26 21 28 21 28C21 28 16 26 13 22C10 18 10 14 12 11C14 8 16 6 16 2Z' fill='url(%23g)'/><circle cx='16' cy='20' r='3' fill='white'/></svg>",
+        href: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%239333EA'/><text x='16' y='22' font-family='sans-serif' font-size='16' font-weight='bold' text-anchor='middle' fill='white'>H</text></svg>",
       },
     ],
   }),

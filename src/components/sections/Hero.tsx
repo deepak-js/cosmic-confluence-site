@@ -1,6 +1,7 @@
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import { useEffect, useState, useRef } from "react";
 import { ArrowRight } from "lucide-react";
+import { Magnetic } from "../ui/Magnetic";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 const TARGET = new Date("2026-11-16T09:00:00+05:30").getTime();
@@ -53,7 +54,7 @@ function CountUnit({ value, label }: { value: number; label: string }) {
   const v = String(value).padStart(2, "0");
   return (
     <div className="flex-1 px-3 md:px-6">
-      <div className="font-display font-bold text-gradient tabular-nums leading-none flex items-start" style={{ fontSize: "clamp(52px,8vw,96px)" }}>
+      <div className="font-display font-bold text-white tabular-nums leading-none flex items-start" style={{ fontSize: "clamp(52px,8vw,96px)" }}>
         <Digit value={v[0]} />
         <Digit value={v[1]} />
       </div>
@@ -105,10 +106,16 @@ export function Hero() {
     return () => clearTimeout(id);
   }, []);
 
+  const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
+  const contentY = useTransform(scrollYProgress, [0, 1], [0, 250]);
+  const contentOpacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
+  const contentScale = useTransform(scrollYProgress, [0, 1], [1, 0.95]);
+  const bgScale = useTransform(scrollYProgress, [0, 1], [1, 1.2]);
+
   return (
     <section ref={heroRef} className="relative min-h-screen overflow-hidden pt-28 pb-28 flex items-center">
       {/* L1 base color via body. L2 nebula */}
-      <div
+      <motion.div
         aria-hidden
         className="absolute inset-0 -z-30 neb-pulse"
         style={{
@@ -116,6 +123,7 @@ export function Hero() {
           backgroundSize: "cover",
           backgroundPosition: "center",
           opacity: 0.35,
+          scale: bgScale
         }}
       />
       {/* L3 orbs */}
@@ -167,7 +175,10 @@ export function Hero() {
         style={{ background: "rgba(168,85,247,0.4)", boxShadow: "0 0 12px rgba(168,85,247,0.8)" }}
       />
 
-      <div className="relative max-w-7xl mx-auto px-5 lg:px-8 w-full z-10">
+      <motion.div 
+        style={{ y: contentY, opacity: contentOpacity, scale: contentScale }}
+        className="relative max-w-7xl mx-auto px-5 lg:px-8 w-full z-10"
+      >
         {/* Eyebrow */}
         <motion.div
           initial={{ opacity: 0, y: 12 }}
@@ -248,17 +259,21 @@ export function Hero() {
 
         {/* CTAs */}
         <motion.div
-          initial={{ opacity: 0, y: 18 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 2.1, duration: 0.7, ease: EASE }}
+          initial={{ opacity: 0, y: 18, filter: "blur(4px)" }}
+          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          transition={{ delay: 2.1, duration: 1.2, type: "spring", damping: 20 }}
           className="mt-10 flex flex-wrap gap-4"
         >
-          <a href="#register" className="btn-primary inline-flex items-center gap-2" style={{ padding: "15px 40px" }}>
-            Register Now <ArrowRight size={18} />
-          </a>
-          <a href="#schedule" className="btn-ghost inline-flex items-center gap-2" style={{ padding: "15px 32px" }}>
-            Explore Program
-          </a>
+          <Magnetic>
+            <a href="#register" className="btn-primary inline-flex items-center gap-2" style={{ padding: "15px 40px" }}>
+              Register Now <ArrowRight size={18} />
+            </a>
+          </Magnetic>
+          <Magnetic>
+            <a href="#schedule" className="btn-ghost inline-flex items-center gap-2" style={{ padding: "15px 32px" }}>
+              Explore Program
+            </a>
+          </Magnetic>
         </motion.div>
 
         {/* Stats */}
@@ -282,7 +297,7 @@ export function Hero() {
             </div>
           ))}
         </motion.div>
-      </div>
+      </motion.div>
 
       {/* Scroll indicator */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 pulse-soft pointer-events-none">
