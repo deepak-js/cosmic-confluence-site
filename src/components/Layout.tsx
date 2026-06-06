@@ -6,7 +6,6 @@ import { CustomCursor, ScrollProgress } from "./Cursor";
 import { SideRail } from "./fx/SideRail";
 import { ensureGsap, gsap, ScrollTrigger } from "@/lib/gsap-setup";
 
-const PlasmaAtmosphere = lazy(() => import("./three/PlasmaAtmosphere"));
 
 export function Layout({ children }: { children: ReactNode }) {
   const [mounted, setMounted] = useState(false);
@@ -48,11 +47,6 @@ export function Layout({ children }: { children: ReactNode }) {
 
   return (
     <div id="top" className="relative min-h-screen">
-      {mounted && (
-        <Suspense fallback={null}>
-          <PlasmaAtmosphere />
-        </Suspense>
-      )}
       <ScrollProgress />
       <CustomCursor />
       <SideRail />
