@@ -1,7 +1,10 @@
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
-import { useEffect, useState, useRef } from "react";
+import { lazy, Suspense, useEffect, useState, useRef } from "react";
 import { ArrowRight } from "lucide-react";
 import { Magnetic } from "../ui/Magnetic";
+import { useMounted } from "@/lib/useMounted";
+
+const HeroScene = lazy(() => import("../three/HeroScene"));
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 const TARGET = new Date("2026-11-16T09:00:00+05:30").getTime();
@@ -17,11 +20,14 @@ const PARTICLES = Array.from({ length: 60 }).map((_, i) => ({
 }));
 
 function useCountdown() {
-  const [now, setNow] = useState(() => Date.now());
+  // Start at 0 so SSR and first client render match — hydrate values in effect.
+  const [now, setNow] = useState<number | null>(null);
   useEffect(() => {
+    setNow(Date.now());
     const id = setInterval(() => setNow(Date.now()), 1000);
     return () => clearInterval(id);
   }, []);
+  if (now === null) return { days: 0, hours: 0, minutes: 0, seconds: 0 };
   const diff = Math.max(0, TARGET - now);
   return {
     days: Math.floor(diff / 86400000),
