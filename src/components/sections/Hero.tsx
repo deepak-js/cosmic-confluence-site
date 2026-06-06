@@ -119,12 +119,15 @@ export function Hero() {
 
   return (
     <section ref={heroRef} className="relative min-h-screen overflow-hidden pt-28 pb-28 flex items-center">
-      {/* L1 base color via body. L2 nebula overlay */}
+      {/* L1 base color via body. L2 nebula */}
       <motion.div
         aria-hidden
-        className="absolute inset-0 -z-30"
+        className="absolute inset-0 -z-30 neb-pulse"
         style={{
-          background: "rgba(5, 5, 8, 0.6)",
+          backgroundImage: "url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=2000&q=80')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          opacity: 0.35,
           scale: bgScale
         }}
       />
