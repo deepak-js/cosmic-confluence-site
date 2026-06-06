@@ -106,6 +106,7 @@ export function Hero() {
   const t = useCountdown();
   const [statsStart, setStatsStart] = useState(false);
   const heroRef = useRef<HTMLElement>(null);
+  const mounted = useMounted();
 
   useEffect(() => {
     const id = setTimeout(() => setStatsStart(true), 2300);
@@ -116,22 +117,24 @@ export function Hero() {
   const contentY = useTransform(scrollYProgress, [0, 1], [0, 250]);
   const contentOpacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
   const contentScale = useTransform(scrollYProgress, [0, 1], [1, 0.95]);
-  const bgScale = useTransform(scrollYProgress, [0, 1], [1, 1.2]);
+  const sceneScale = useTransform(scrollYProgress, [0, 1], [1, 1.25]);
+  const sceneOpacity = useTransform(scrollYProgress, [0, 1], [1, 0.2]);
 
   return (
     <section ref={heroRef} className="relative min-h-screen overflow-hidden pt-28 pb-28 flex items-center">
-      {/* L1 base color via body. L2 nebula */}
+      {/* L1 3D scene (replaces unsplash backdrop) */}
       <motion.div
         aria-hidden
-        className="absolute inset-0 -z-30 neb-pulse"
-        style={{
-          backgroundImage: "url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=2000&q=80')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          opacity: 0.35,
-          scale: bgScale
-        }}
-      />
+        className="absolute inset-0 -z-30"
+        style={{ scale: sceneScale, opacity: sceneOpacity }}
+      >
+        {mounted && (
+          <Suspense fallback={null}>
+            <HeroScene />
+          </Suspense>
+        )}
+      </motion.div>
+
       {/* L3 orbs */}
       <div aria-hidden className="absolute inset-0 -z-20 overflow-hidden">
         <div
