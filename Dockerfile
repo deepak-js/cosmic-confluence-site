@@ -4,7 +4,6 @@ FROM node:22-alpine AS builder
 WORKDIR /app
 
 # Copy package files
-# Including bun.lock if it exists, though we will use npm for standard compatibility
 COPY package.json package-lock.json* bun.lock* ./
 
 # Install dependencies using npm
@@ -23,13 +22,15 @@ WORKDIR /app
 
 # Set production environment
 ENV NODE_ENV=production
+ENV HOST=0.0.0.0
+ENV PORT=3000
 
 # Copy necessary files from builder
 COPY --from=builder /app/package.json ./
 COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/.output ./.output
 
-# Expose the default port used in the start script
+# Expose the default port
 EXPOSE 3000
 
 # Start the application
