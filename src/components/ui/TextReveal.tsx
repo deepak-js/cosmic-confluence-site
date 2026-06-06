@@ -1,4 +1,4 @@
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, type Variants } from "framer-motion";
 import { useRef } from "react";
 
 export function TextReveal({ text, className = "" }: { text: string; className?: string }) {
@@ -15,18 +15,18 @@ export function TextReveal({ text, className = "" }: { text: string; className?:
     },
   };
   
-  const child = {
+  const child: Variants = {
     visible: {
       opacity: 1,
       y: 0,
       filter: "blur(0px)",
-      transition: { type: "spring", damping: 12, stiffness: 100 },
+      transition: { type: "spring" as const, damping: 12, stiffness: 100 },
     },
     hidden: {
       opacity: 0,
       y: 20,
       filter: "blur(6px)",
-      transition: { type: "spring", damping: 12, stiffness: 100 },
+      transition: { type: "spring" as const, damping: 12, stiffness: 100 },
     },
   };
   

@@ -1,7 +1,10 @@
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
-import { useEffect, useState, useRef } from "react";
+import { lazy, Suspense, useEffect, useState, useRef } from "react";
 import { ArrowRight } from "lucide-react";
 import { Magnetic } from "../ui/Magnetic";
+import { useMounted } from "@/lib/useMounted";
+
+const HeroScene = lazy(() => import("../three/HeroScene"));
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 const TARGET = new Date("2026-11-16T09:00:00+05:30").getTime();
@@ -17,11 +20,14 @@ const PARTICLES = Array.from({ length: 60 }).map((_, i) => ({
 }));
 
 function useCountdown() {
-  const [now, setNow] = useState(() => Date.now());
+  // Start at 0 so SSR and first client render match — hydrate values in effect.
+  const [now, setNow] = useState<number | null>(null);
   useEffect(() => {
+    setNow(Date.now());
     const id = setInterval(() => setNow(Date.now()), 1000);
     return () => clearInterval(id);
   }, []);
+  if (now === null) return { days: 0, hours: 0, minutes: 0, seconds: 0 };
   const diff = Math.max(0, TARGET - now);
   return {
     days: Math.floor(diff / 86400000),
@@ -100,6 +106,7 @@ export function Hero() {
   const t = useCountdown();
   const [statsStart, setStatsStart] = useState(false);
   const heroRef = useRef<HTMLElement>(null);
+  const mounted = useMounted();
 
   useEffect(() => {
     const id = setTimeout(() => setStatsStart(true), 2300);
@@ -110,22 +117,24 @@ export function Hero() {
   const contentY = useTransform(scrollYProgress, [0, 1], [0, 250]);
   const contentOpacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
   const contentScale = useTransform(scrollYProgress, [0, 1], [1, 0.95]);
-  const bgScale = useTransform(scrollYProgress, [0, 1], [1, 1.2]);
+  const sceneScale = useTransform(scrollYProgress, [0, 1], [1, 1.25]);
+  const sceneOpacity = useTransform(scrollYProgress, [0, 1], [1, 0.2]);
 
   return (
     <section ref={heroRef} className="relative min-h-screen overflow-hidden pt-28 pb-28 flex items-center">
-      {/* L1 base color via body. L2 nebula */}
+      {/* L1 3D scene (replaces unsplash backdrop) */}
       <motion.div
         aria-hidden
-        className="absolute inset-0 -z-30 neb-pulse"
-        style={{
-          backgroundImage: "url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=2000&q=80')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          opacity: 0.35,
-          scale: bgScale
-        }}
-      />
+        className="absolute inset-0 -z-30"
+        style={{ scale: sceneScale, opacity: sceneOpacity }}
+      >
+        {mounted && (
+          <Suspense fallback={null}>
+            <HeroScene />
+          </Suspense>
+        )}
+      </motion.div>
+
       {/* L3 orbs */}
       <div aria-hidden className="absolute inset-0 -z-20 overflow-hidden">
         <div
