@@ -125,24 +125,25 @@ export function PlasmaAtmosphere() {
 
   return (
     <div aria-hidden className="fixed inset-0 -z-50 pointer-events-none" style={{ background: "#050508" }}>
-      <Canvas
-        orthographic
-        camera={{ position: [0, 0, 1], zoom: 1 }}
-        gl={{ antialias: false, powerPreference: "high-performance", alpha: false }}
-        dpr={[1, 1.5]}
-        style={{ width: "100%", height: "100%" }}
-      >
-        <NebulaPlane scrollRef={scroll} />
-        <EffectComposer multisampling={0}>
-          <Bloom intensity={0.8} luminanceThreshold={0.35} luminanceSmoothing={0.4} mipmapBlur />
-          <ChromaticAberration offset={[0.0008, 0.0014] as any} blendFunction={BlendFunction.NORMAL} radialModulation={false} modulationOffset={0.5} />
-          <Noise opacity={0.05} />
-          <Vignette eskil={false} offset={0.1} darkness={0.85} />
-        </EffectComposer>
-      </Canvas>
-      {/* grain + scanline overlay */}
+      <div style={{ position: "absolute", inset: 0, opacity: 0.42 }}>
+        <Canvas
+          orthographic
+          camera={{ position: [0, 0, 1], zoom: 1 }}
+          gl={{ antialias: false, powerPreference: "high-performance", alpha: false }}
+          dpr={[1, 1.25]}
+          style={{ width: "100%", height: "100%" }}
+        >
+          <NebulaPlane scrollRef={scroll} />
+          <EffectComposer multisampling={0}>
+            <Bloom intensity={0.55} luminanceThreshold={0.5} luminanceSmoothing={0.4} mipmapBlur />
+            <Vignette eskil={false} offset={0.15} darkness={0.9} />
+          </EffectComposer>
+        </Canvas>
+      </div>
+      {/* Darken + grain overlays so foreground content stays legible */}
+      <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at center, rgba(5,5,8,0.35) 0%, rgba(5,5,8,0.85) 80%)" }} />
       <div
-        className="absolute inset-0 mix-blend-overlay opacity-[0.06]"
+        className="absolute inset-0 mix-blend-overlay opacity-[0.05]"
         style={{
           backgroundImage:
             "repeating-linear-gradient(0deg, rgba(255,255,255,0.7) 0 1px, transparent 1px 3px)",
@@ -153,3 +154,4 @@ export function PlasmaAtmosphere() {
 }
 
 export default PlasmaAtmosphere;
+
