@@ -25,13 +25,14 @@ function useCountdown() {
     const id = setInterval(() => setNow(Date.now()), 1000);
     return () => clearInterval(id);
   }, []);
-  if (now === null) return { days: 0, hours: 0, minutes: 0, seconds: 0 };
+  if (now === null) return { months: 0, days: 0, hours: 0, minutes: 0 };
   const diff = Math.max(0, TARGET - now);
+  const totalDays = Math.floor(diff / 86400000);
   return {
-    days: Math.floor(diff / 86400000),
+    months: Math.floor(totalDays / 30),
+    days: totalDays % 30,
     hours: Math.floor((diff / 3600000) % 24),
     minutes: Math.floor((diff / 60000) % 60),
-    seconds: Math.floor((diff / 1000) % 60),
   };
 }
 
@@ -235,10 +236,10 @@ export function Hero() {
         >
           <div className="label-mono-xs mb-5">Conference begins in</div>
           <div className="flex items-stretch divide-x divide-white/[0.06] -mx-3 md:-mx-6 max-w-2xl">
-            <CountUnit value={t.days} label="Days" />
-            <CountUnit value={t.hours} label="Hrs" />
-            <CountUnit value={t.minutes} label="Mins" />
-            <CountUnit value={t.seconds} label="Secs" />
+            <CountUnit value={t.months} label="months" />
+            <CountUnit value={t.days} label="days" />
+            <CountUnit value={t.hours} label="hours" />
+            <CountUnit value={t.minutes} label="minutes" />
           </div>
         </motion.div>
 
