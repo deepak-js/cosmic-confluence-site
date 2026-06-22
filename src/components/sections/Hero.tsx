@@ -18,19 +18,16 @@ const PARTICLES = Array.from({ length: 60 }).map((_, i) => ({
 }));
 
 function useCountdown() {
-  // Start at 0 so SSR and first client render match — hydrate values in effect.
   const [now, setNow] = useState<number | null>(null);
   useEffect(() => {
     setNow(Date.now());
     const id = setInterval(() => setNow(Date.now()), 1000);
     return () => clearInterval(id);
   }, []);
-  if (now === null) return { months: 0, days: 0, hours: 0, minutes: 0 };
+  if (now === null) return { days: 0, hours: 0, minutes: 0 };
   const diff = Math.max(0, TARGET - now);
-  const totalDays = Math.floor(diff / 86400000);
   return {
-    months: Math.floor(totalDays / 30),
-    days: totalDays % 30,
+    days: Math.floor(diff / 86400000),
     hours: Math.floor((diff / 3600000) % 24),
     minutes: Math.floor((diff / 60000) % 60),
   };
@@ -236,7 +233,6 @@ export function Hero() {
         >
           <div className="label-mono-xs mb-5">Conference begins in</div>
           <div className="flex items-stretch divide-x divide-white/[0.06] -mx-3 md:-mx-6 max-w-2xl">
-            <CountUnit value={t.months} label="months" />
             <CountUnit value={t.days} label="days" />
             <CountUnit value={t.hours} label="hours" />
             <CountUnit value={t.minutes} label="minutes" />
