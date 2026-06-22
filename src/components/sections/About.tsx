@@ -7,7 +7,7 @@ const STATS = [
   { value: 40, suffix: "+", label: "Countries" },
   { value: 60, suffix: "+", label: "Speakers" },
   { value: 30, suffix: "+", label: "Papers" },
-  { value: 3, suffix: "", label: "Days" },
+  { value: 2, suffix: "", label: "Days" },
   { value: 12, suffix: "", label: "Workshops" },
 ];
 

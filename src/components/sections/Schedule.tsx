@@ -8,7 +8,7 @@ const DAYS: { id: string; label: string; date: string; items: Item[] }[] = [
   {
     id: "d1",
     label: "Day 1",
-    date: "Nov 14 · Fri",
+    date: "Dec 11 · Fri",
     items: [
       { time: "09:00", title: "Inauguration Ceremony", room: "Bishop Ambrose Hall", track: "keynote" },
       { time: "10:30", title: "Keynote: Frontiers in Fusion Research", speaker: "Prof. Elena Marchetti", room: "Bishop Ambrose Hall", track: "keynote" },
@@ -21,7 +21,7 @@ const DAYS: { id: string; label: string; date: string; items: Item[] }[] = [
   {
     id: "d2",
     label: "Day 2",
-    date: "Nov 15 · Sat",
+    date: "Dec 12 · Sat",
     items: [
       { time: "09:00", title: "Keynote: Industrial Plasma Applications", speaker: "Dr. Rajiv Sharma", room: "Bishop Ambrose Hall", track: "keynote" },
       { time: "10:30", title: "Workshop: Plasma Diagnostics", room: "Lab 204", track: "workshop" },
@@ -29,19 +29,8 @@ const DAYS: { id: string; label: string; date: string; items: Item[] }[] = [
       { time: "14:30", title: "Track C: Low-Temperature Plasma", room: "Hall A", track: "session" },
       { time: "14:30", title: "Track D: Computational Plasma Physics", room: "Hall B", track: "session" },
       { time: "16:30", title: "Poster Session 2", room: "Atrium", track: "session" },
-      { time: "19:30", title: "Cultural Evening", room: "Open Theatre", track: "social" },
-    ],
-  },
-  {
-    id: "d3",
-    label: "Day 3",
-    date: "Nov 16 · Sun",
-    items: [
-      { time: "09:00", title: "Keynote: Plasma Medicine — Future of Healthcare", speaker: "Prof. Sarah K. Lindgren", room: "Bishop Ambrose Hall", track: "keynote" },
-      { time: "10:30", title: "Workshop: AI in Plasma Research", room: "Lab 204", track: "workshop" },
-      { time: "13:00", title: "Closing Panel: Next Decade in Plasma Science", room: "Bishop Ambrose Hall", track: "keynote" },
-      { time: "15:00", title: "Award Ceremony", room: "Bishop Ambrose Hall", track: "social" },
-      { time: "16:30", title: "Valedictory & Farewell Lunch", room: "University Lawns", track: "social" },
+      { time: "18:00", title: "Award Ceremony & Valedictory", room: "Bishop Ambrose Hall", track: "social" },
+      { time: "19:30", title: "Cultural Evening & Farewell", room: "Open Theatre", track: "social" },
     ],
   },
 ];
@@ -62,7 +51,7 @@ export function Schedule() {
       <div className="max-w-7xl mx-auto px-5 lg:px-8">
         <SectionHeader
           eyebrow="Program"
-          title="Three days. One frontier."
+          title="Two days. One frontier."
           subtitle="A curated journey through keynotes, parallel technical sessions, hands-on workshops and unforgettable evenings."
         />
 
