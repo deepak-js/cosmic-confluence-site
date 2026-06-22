@@ -1,7 +1,6 @@
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, AnimatePresence } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { Reveal, SectionHeader, ScrollReveal } from "../Reveal";
-import { TextReveal } from "../ui/TextReveal";
 
 const STATS = [
   { value: 500, suffix: "+", label: "Delegates" },
@@ -32,6 +31,8 @@ function Counter({ value }: { value: number }) {
 
 const PARTNERS = ["ISRO", "DAE", "IPR", "BARC", "TIFR", "IIT-B", "IISc", "CSIR"];
 
+const CONFERENCE_TEXT = "The Plasma Research Workshop and Colloquium 2026 (PRWC2026) is a two-day national-level scientific event organized by the Department of Physics, St. Joseph’s University, Bengaluru, on 11–12 December 2026. The conference aims to bring together researchers, academicians, scientists, industry professionals, and students working in various domains of plasma science and technology.\n\nPRWC2026 provides a vibrant platform for presenting recent advances, exchanging research ideas, fostering collaborations, and discussing emerging challenges in both fundamental and applied plasma physics. The event will feature keynote lectures, invited talks, oral and poster presentations, and interactive discussions led by distinguished experts from academia and research institutions.\n\nThe conference welcomes contributions in areas including Fundamental and Basic Plasmas, Space and Astrophysical Plasmas, Dusty and Exotic Plasmas, Laser and Quantum Plasmas, MHD and Solar Plasmas, Beam–Plasma Interactions, Nuclear Fusion, Laboratory Plasmas, Computational Plasma Modeling, and other interdisciplinary topics.";
+
 export function About() {
   return (
     <section id="about" className="relative py-28">
@@ -39,33 +40,30 @@ export function About() {
         <div className="grid lg:grid-cols-2 gap-16 items-start">
           <div>
             <SectionHeader
-              eyebrow="About the Symposium"
+              eyebrow="About PRWC2026"
               title="A global forum for plasma science."
-              subtitle="PLASMA 2025 is a premier global forum bringing together leading minds in plasma physics, controlled nuclear fusion, plasma medicine, space plasma, and industrial plasma applications. Hosted by the prestigious Department of Physics at St. Joseph's University, Bengaluru — one of India's top research institutions — this 3-day symposium invites 500+ delegates from 40+ countries."
             />
             <ScrollReveal>
-              <div className="mt-8 p-6 glass rounded-2xl border-l-2 border-l-cyan">
-                <TextReveal 
-                  className="text-sm text-muted-foreground leading-relaxed italic"
-                  text='"Our mission is to accelerate breakthroughs in plasma science by uniting researchers, industry pioneers, and emerging scholars under one roof — bridging fundamental physics with transformative applications across energy, medicine, and space."'
-                />
+              <div className="mt-8 space-y-6 text-muted-foreground text-sm leading-relaxed">
+                {CONFERENCE_TEXT.split('\n\n').map((paragraph, idx) => (
+                  <p key={idx}>{paragraph}</p>
+                ))}
               </div>
             </ScrollReveal>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+          <div className="grid grid-cols-2 gap-4">
             {STATS.map((s, i) => (
-              <Reveal key={s.label} delay={i * 0.08}>
-                <motion.div 
-                  whileHover={{ scale: 1.05, y: -8, rotateX: 2, rotateY: -2 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                  className="glass rounded-2xl p-5 h-full hover:border-glow shadow-lg"
-                >
-                  <div className="font-display font-bold text-3xl md:text-4xl text-gradient">
-                    <Counter value={s.value} />{s.suffix}
+              <Reveal key={s.label} delay={0.1 * i}>
+                <div className="glass p-6 rounded-3xl flex flex-col justify-center min-h-[140px] border border-white/5 hover:border-violet/30 transition-colors">
+                  <div className="font-display font-bold text-4xl text-gradient mb-2">
+                    <Counter value={s.value} />
+                    {s.suffix}
                   </div>
-                  <div className="text-xs uppercase tracking-widest text-muted-foreground mt-1">{s.label}</div>
-                </motion.div>
+                  <div className="font-mono text-[10px] tracking-[0.2em] uppercase text-tertiary">
+                    {s.label}
+                  </div>
+                </div>
               </Reveal>
             ))}
           </div>

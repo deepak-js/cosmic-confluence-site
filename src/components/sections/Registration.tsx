@@ -7,10 +7,11 @@ import { Check, Loader2 } from "lucide-react";
 import { SectionHeader, Reveal } from "../Reveal";
 
 const TIERS = [
-  { name: "Student / Scholar", price: "₹2,500 / $35", early: "₹2,000 / $28", perks: ["Full 3-day access", "Lunch & refreshments", "Conference kit"] },
-  { name: "Academic / Faculty", price: "₹5,000 / $70", early: "₹4,000 / $55", perks: ["All Student perks", "Gala dinner invite", "Proceedings copy"], featured: true },
-  { name: "Industry Professional", price: "₹8,000 / $110", early: "₹6,500 / $90", perks: ["All Faculty perks", "Networking lounge", "Sponsor meet-up"] },
-  { name: "International Delegate", price: "$150", early: "$120", perks: ["Full delegate access", "Visa support letter", "Airport pickup option"] },
+  { name: "SJU Students", price: "Free", early: "Free", perks: ["Full 2-day access", "Lunch & refreshments", "Conference kit"] },
+  { name: "Other Students", price: "₹500", early: "₹500", perks: ["Full 2-day access", "Lunch & refreshments", "Conference kit"] },
+  { name: "Ph.D. Scholars", price: "₹1,000", early: "₹1,000", perks: ["Full 2-day access", "Lunch & refreshments", "Conference kit"] },
+  { name: "Faculty / Academicians", price: "₹1,500", early: "₹1,500", perks: ["Full 2-day access", "Lunch & refreshments", "Proceedings copy"], featured: true },
+  { name: "Industry Professionals", price: "₹2,000", early: "₹2,000", perks: ["Full 2-day access", "Networking lounge", "Sponsor meet-up"] },
 ];
 
 const schema = z.object({
@@ -50,7 +51,7 @@ export function Registration() {
       <div className="max-w-7xl mx-auto px-5 lg:px-8">
         <SectionHeader eyebrow="Registration" title="Secure your seat at PLASMA 2025." subtitle="Early bird pricing valid until October 15, 2025." center />
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-14">
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mt-14">
           {TIERS.map((t, i) => (
             <motion.div
               key={t.name}
@@ -67,9 +68,8 @@ export function Registration() {
               )}
               <h3 className="font-display font-semibold text-lg">{t.name}</h3>
               <div className="mt-4">
-                <div className="text-xs text-muted-foreground line-through">{t.price}</div>
-                <div className="font-display font-bold text-2xl text-gradient">{t.early}</div>
-                <div className="text-[10px] uppercase tracking-widest text-cyan mt-1">Early Bird</div>
+                <div className="font-display font-bold text-2xl text-gradient">{t.price}</div>
+                <div className="text-[10px] uppercase tracking-widest text-cyan mt-1">Registration Fee</div>
               </div>
               <ul className="mt-4 space-y-2">
                 {t.perks.map((p) => (

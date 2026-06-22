@@ -1,6 +1,10 @@
 import { Plane, Train, TramFront, Hotel, FileCheck2 } from "lucide-react";
 import { SectionHeader, Reveal } from "../Reveal";
 
+const UNIV_TEXT = "St Joseph’s University (SJU) is a Jesuit university at the heart of Bengaluru, the Silicon city of India. Established in 1882 by Paris foreign Fathers, the management of the college was handed over to the Jesuit order (Society of Jesus) in 1937. The college was first affiliated to the university of Madras and later to the Mysore and Bangalore universities. In 1986, St Joseph’s College became the first affiliated college in Karnataka to offer postgraduate courses. In 1988, it became the first college in Karnataka to get a research center and in 2005, it was one of five colleges in Karnataka that was awarded academic autonomy. In February 2021, St Joseph's University bill was presented in the Karnataka Legislative Assembly and was subsequently passed by the Legislative Assembly and Karnataka Legislative Councill. The college received its University status on 2nd July 2022 and was inaugurated as India’s first public-private university by the President of India, Smt. Droupadi Murmu on 27 September 2022.";
+
+const DEPT_TEXT = "The Department of Physics at St. Joseph’s University, Bengaluru, has a distinguished legacy dating back to 1923. Over the past century, the department has played a significant role in promoting excellence in physics education, research, and scientific outreach.\n\nThe department offers quality undergraduate and postgraduate programmes supported by experienced faculty members, well-equipped laboratories, and modern computational facilities. It actively fosters scientific curiosity, critical thinking, and research-oriented learning among students.\n\nA notable feature of the department is its long-standing collaboration with ISRO through the \"Space and Rocket Dynamics\" certificate programme, providing students with opportunities to interact with leading scientists and gain exposure to advancements in space science and technology.\n\nThe department maintains strong academic and research connections with premier institutions such as ISRO, IISc, Raman Research Institute (RRI), and the Indian Institute of Astrophysics (IIA). Research activities span diverse areas including Plasma Physics, Astrophysics, Computational Physics, Materials Science, and Interdisciplinary Physics. Through its commitment to academic excellence and research innovation, the Department of Physics continues to nurture future scientists, researchers, and educators while contributing to the advancement of science and society.";
+
 const TRAVEL = [
   { icon: Plane, label: "Kempegowda Intl. Airport", dist: "35 km" },
   { icon: Train, label: "KSR Bengaluru City Station", dist: "4 km" },
@@ -44,6 +48,27 @@ export function Venue() {
               <p className="text-sm text-muted-foreground mt-4 leading-relaxed">
                 Sessions take place in <span className="text-foreground font-medium">Bishop Ambrose Hall</span> (capacity 600) and the <span className="text-foreground font-medium">Science & Technology Block</span>.
               </p>
+            </div>
+          </Reveal>
+        </div>
+
+        <div className="grid lg:grid-cols-2 gap-6 mt-6">
+          <Reveal delay={0.1}>
+            <div className="glass rounded-3xl p-8 h-full border-t-4 border-t-violet">
+              <h3 className="font-display font-semibold text-xl mb-4 text-white">About St Joseph’s University</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed text-justify">
+                {UNIV_TEXT}
+              </p>
+            </div>
+          </Reveal>
+          <Reveal delay={0.2}>
+            <div className="glass rounded-3xl p-8 h-full border-t-4 border-t-cyan">
+              <h3 className="font-display font-semibold text-xl mb-4 text-white">Department of Physics</h3>
+              <div className="text-sm text-muted-foreground leading-relaxed text-justify space-y-4">
+                {DEPT_TEXT.split("\n\n").map((para, i) => (
+                  <p key={i}>{para}</p>
+                ))}
+              </div>
             </div>
           </Reveal>
         </div>

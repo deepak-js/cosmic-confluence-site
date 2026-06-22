@@ -30,9 +30,12 @@ export function Navbar() {
       }`}
     >
       <nav className="max-w-7xl mx-auto px-5 lg:px-8 h-16 flex items-center justify-between">
-        <a href="#top" className="flex items-baseline gap-1.5 font-display font-black text-xl tracking-tight">
-          <span className="text-gradient">PLASMA</span>
-          <span className="text-white">2025</span>
+        <a href="#top" className="flex items-center gap-3 font-display font-black text-xl tracking-tight">
+          <img src="/logo-transparent.png" alt="PRWC Logo" className="h-10 w-auto object-contain" />
+          <div className="flex items-baseline gap-1.5">
+            <span className="text-gradient">PRWC</span>
+            <span className="text-white">2026</span>
+          </div>
         </a>
 
         <ul className="hidden lg:flex items-center gap-7">

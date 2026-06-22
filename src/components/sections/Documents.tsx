@@ -14,12 +14,12 @@ const DOCS = [
 ];
 
 const DATES = [
-  { date: "July 1, 2025", title: "Abstract Submission Opens" },
-  { date: "September 30, 2025", title: "Abstract Submission Deadline" },
-  { date: "October 15, 2025", title: "Early Bird Registration Closes" },
-  { date: "October 20, 2025", title: "Notification of Acceptance" },
-  { date: "November 1, 2025", title: "Full Paper Submission" },
-  { date: "November 14–16, 2025", title: "Conference Days", highlight: true },
+  { date: "July 1, 2026", title: "Abstract Submission Opens" },
+  { date: "September 30, 2026", title: "Abstract Submission Deadline" },
+  { date: "October 15, 2026", title: "Early Bird Registration Closes" },
+  { date: "October 20, 2026", title: "Notification of Acceptance" },
+  { date: "November 1, 2026", title: "Full Paper Submission" },
+  { date: "December 11–12, 2026", title: "Conference Days", highlight: true },
 ];
 
 const ICON: Record<string, typeof FileText> = { PDF: FileText, DOCX: FileType };
@@ -59,6 +59,21 @@ export function Documents() {
             );
           })}
         </div>
+
+        <Reveal delay={0.2}>
+          <div className="mt-20 glass rounded-3xl p-8 border-l-4 border-l-violet flex flex-col md:flex-row gap-6 items-center">
+            <div className="flex-1">
+              <h3 className="font-display font-semibold text-2xl mb-2 text-white">Publications</h3>
+              <p className="text-muted-foreground text-sm leading-relaxed">
+                Selected full-length articles will be submitted to the Journal: <strong className="text-white">Natural Sciences and Applied Technology</strong> (SCOPUS, Zenodo, Google Scholar, ROAD, DOAJ, ZDB) for peer review and publication.
+                <br /><span className="text-xs uppercase tracking-widest text-cyan mt-3 block">ISSN: 3049-4206 (Electronic)</span>
+              </p>
+            </div>
+            <div className="shrink-0">
+              <FileText size={48} className="text-violet/50" />
+            </div>
+          </div>
+        </Reveal>
 
         <Reveal delay={0.2}>
           <h3 className="font-display font-semibold text-2xl mt-24 mb-8 text-center">Important Dates</h3>

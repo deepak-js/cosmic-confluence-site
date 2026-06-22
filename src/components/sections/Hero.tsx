@@ -5,7 +5,7 @@ import { Magnetic } from "../ui/Magnetic";
 import { useMounted } from "@/lib/useMounted";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
-const TARGET = new Date("2026-11-16T09:00:00+05:30").getTime();
+const TARGET = new Date("2026-12-11T09:00:00+05:30").getTime();
 
 // 60 static particles
 const PARTICLES = Array.from({ length: 60 }).map((_, i) => ({
@@ -68,48 +68,14 @@ function CountUnit({ value, label }: { value: number; label: string }) {
   );
 }
 
-function useCountUp(target: number, duration = 1200, start = false) {
-  const [n, setN] = useState(0);
-  useEffect(() => {
-    if (!start) return;
-    const t0 = performance.now();
-    let raf = 0;
-    const tick = (t: number) => {
-      const p = Math.min(1, (t - t0) / duration);
-      const eased = 1 - Math.pow(1 - p, 3);
-      setN(Math.floor(target * eased));
-      if (p < 1) raf = requestAnimationFrame(tick);
-    };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-  }, [target, duration, start]);
-  return n;
-}
 
-const STATS = [
-  { v: 500, s: "+", l: "Delegates" },
-  { v: 40, s: "+", l: "Countries" },
-  { v: 60, s: "+", l: "Speakers" },
-  { v: 3, s: "", l: "Days" },
-];
 
-function StatNum({ value, suffix, started }: { value: number; suffix: string; started: boolean }) {
-  const n = useCountUp(value, 1200, started);
-  return <span className="tabular-nums">{n}{suffix}</span>;
-}
-
-const TITLE = "PLASMA 2025";
+const TITLE = "PRWC 2026";
 
 export function Hero() {
   const t = useCountdown();
-  const [statsStart, setStatsStart] = useState(false);
   const heroRef = useRef<HTMLElement>(null);
   const mounted = useMounted();
-
-  useEffect(() => {
-    const id = setTimeout(() => setStatsStart(true), 2300);
-    return () => clearTimeout(id);
-  }, []);
 
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
   const contentY = useTransform(scrollYProgress, [0, 1], [0, 250]);
@@ -184,27 +150,9 @@ export function Hero() {
         style={{ y: contentY, opacity: contentOpacity, scale: contentScale }}
         className="relative max-w-7xl mx-auto px-5 lg:px-8 w-full z-10"
       >
-        {/* Eyebrow */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8, duration: 0.7, ease: EASE }}
-          className="inline-flex flex-col gap-2"
-        >
-          <span className="font-mono text-[11px] tracking-[0.25em] uppercase text-muted-foreground">
-            Nov 14–16, 2025 · Bengaluru, India
-          </span>
-          <motion.span
-            initial={{ scaleX: 0 }}
-            animate={{ scaleX: 1 }}
-            transition={{ delay: 0.95, duration: 0.7, ease: EASE }}
-            className="h-px w-full bg-gradient-to-r from-violet to-cyan origin-left"
-          />
-        </motion.div>
-
         {/* Headline */}
         <h1
-          className="font-display font-black mt-6 relative inline-block"
+          className="font-display font-black relative inline-block text-left w-full"
           style={{ fontSize: "clamp(72px,12vw,140px)", letterSpacing: "-0.04em", lineHeight: 0.95 }}
         >
           <span className="text-gradient inline-block">
@@ -235,15 +183,33 @@ export function Hero() {
           />
         </h1>
 
+        {/* Eyebrow (Now positioned below Headline) */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.8, duration: 0.7, ease: EASE }}
+          className="mt-6 inline-flex flex-col gap-2 text-left"
+        >
+          <span className="font-mono text-[11px] tracking-[0.25em] uppercase text-muted-foreground">
+            Dec 11–12, 2026 · Bengaluru, India
+          </span>
+          <motion.span
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: 1 }}
+            transition={{ delay: 0.95, duration: 0.7, ease: EASE }}
+            className="h-px w-full bg-gradient-to-r from-violet to-cyan origin-left"
+          />
+        </motion.div>
+
         {/* Subtitle */}
         <motion.p
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.6, duration: 0.7, ease: EASE }}
-          className="mt-6 max-w-2xl text-muted-foreground"
+          className="mt-6 max-w-2xl text-muted-foreground text-left"
           style={{ fontSize: "clamp(14px,1.8vw,20px)", letterSpacing: "0.08em" }}
         >
-          International Symposium on <span className="text-foreground">Plasma Science &amp; Technology</span>
+          Plasma Research Workshop and <span className="text-foreground">Colloquium 2026</span>
         </motion.p>
 
         {/* Countdown */}
@@ -281,27 +247,7 @@ export function Hero() {
           </Magnetic>
         </motion.div>
 
-        {/* Stats */}
-        <motion.div
-          initial={{ opacity: 0, y: 18 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 2.3, duration: 0.7, ease: EASE }}
-          className="mt-12 inline-flex flex-wrap gap-x-10 gap-y-4 px-6 py-4 rounded-xl"
-          style={{
-            background: "rgba(255,255,255,0.02)",
-            border: "1px solid rgba(255,255,255,0.05)",
-            backdropFilter: "blur(10px)",
-          }}
-        >
-          {STATS.map((s) => (
-            <div key={s.l} className="flex flex-col">
-              <div className="font-body font-bold text-[22px] text-white">
-                <StatNum value={s.v} suffix={s.s} started={statsStart} />
-              </div>
-              <div className="font-mono text-[10px] tracking-[0.2em] uppercase text-tertiary">{s.l}</div>
-            </div>
-          ))}
-        </motion.div>
+
       </motion.div>
 
       {/* Scroll indicator */}

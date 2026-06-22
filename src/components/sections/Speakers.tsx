@@ -6,48 +6,25 @@ import { ensureGsap, gsap, ScrollTrigger } from "@/lib/gsap-setup";
 
 const FEATURED = [
   {
-    name: "Prof. Elena Marchetti",
-    title: "Director, ITER Fusion Lab",
-    country: "🇮🇹 Italy",
-    topic: "Frontiers in Fusion Research",
-    bio: "Pioneer of advanced tokamak diagnostics with over 200 publications in fusion energy science.",
+    name: "Prof. Dr. Vinod Krishan",
+    title: "Chief Guest",
+    country: "🇮🇳 India",
+    topic: "Retd., IIAp",
+    bio: "Renowned physicist and leading expert in astrophysics and plasma science.",
     img: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&q=80",
   },
   {
-    name: "Dr. Rajiv Sharma",
-    title: "Head of Plasma Physics, ISRO",
+    name: "Prof. Dr. Vinod Kumar Sayal",
+    title: "Chief Guest",
     country: "🇮🇳 India",
-    topic: "Plasma Propulsion for Deep Space",
-    bio: "Architect of India's electric propulsion program, leading next-gen plasma thrusters.",
+    topic: "Retd., SMU",
+    bio: "Distinguished academician with profound contributions to theoretical and applied physics.",
     img: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=800&q=80",
-  },
-  {
-    name: "Prof. Sarah K. Lindgren",
-    title: "MIT Plasma Science Center",
-    country: "🇺🇸 USA",
-    topic: "Plasma Medicine: Future of Healthcare",
-    bio: "Leading researcher on cold atmospheric plasma applications in oncology and wound healing.",
-    img: "https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?w=800&q=80",
-  },
-  {
-    name: "Dr. Hiroshi Tanaka",
-    title: "National Fusion Research Institute",
-    country: "🇯🇵 Japan",
-    topic: "Magnetic Confinement Breakthroughs",
-    bio: "Renowned for groundbreaking work in helical plasma confinement and stellarator design.",
-    img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80",
   },
 ];
 
 const INVITED = [
-  { name: "Dr. Anna Volkov", inst: "Kurchatov Institute", country: "🇷🇺", img: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&q=80" },
-  { name: "Prof. Liu Wei", inst: "Tsinghua University", country: "🇨🇳", img: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&q=80" },
-  { name: "Dr. Maria Santos", inst: "INPE Brazil", country: "🇧🇷", img: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&q=80" },
-  { name: "Prof. Klaus Werner", inst: "Max Planck Institute", country: "🇩🇪", img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80" },
-  { name: "Dr. Priya Iyer", inst: "IIT Bombay", country: "🇮🇳", img: "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=400&q=80" },
-  { name: "Prof. Diane Laurent", inst: "CEA Cadarache", country: "🇫🇷", img: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=400&q=80" },
-  { name: "Dr. Ahmed Al-Rashid", inst: "KAUST", country: "🇸🇦", img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&q=80" },
-  { name: "Prof. Yuki Sato", inst: "Kyoto University", country: "🇯🇵", img: "https://images.unsplash.com/photo-1463453091185-61582044d556?w=400&q=80" },
+  { name: "Dr. Swarniv Chandra", inst: "Gov. Gen. Deg. College, Kushmandi", country: "🇮🇳", img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80" },
 ];
 
 function FeaturedCard({ s }: { s: typeof FEATURED[number] }) {
@@ -139,7 +116,8 @@ export function Speakers({ showAll = false }: { showAll?: boolean }) {
       {/* Invited grid */}
       <div className="max-w-7xl mx-auto px-5 lg:px-8 mt-20">
         <Reveal>
-          <h3 className="font-display font-semibold text-2xl mb-6">Invited Speakers</h3>
+          <h3 className="font-display font-semibold text-2xl mb-2">Keynote & Invited Speakers</h3>
+          <p className="text-muted-foreground text-sm mb-6">More speakers to be announced soon.</p>
         </Reveal>
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5">
           {INVITED.slice(0, expanded ? INVITED.length : 4).map((p, i) => (
