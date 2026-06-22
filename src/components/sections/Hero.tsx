@@ -24,12 +24,13 @@ function useCountdown() {
     const id = setInterval(() => setNow(Date.now()), 1000);
     return () => clearInterval(id);
   }, []);
-  if (now === null) return { days: 0, hours: 0, minutes: 0 };
+  if (now === null) return { days: 0, hours: 0, minutes: 0, seconds: 0 };
   const diff = Math.max(0, TARGET - now);
   return {
     days: Math.floor(diff / 86400000),
     hours: Math.floor((diff / 3600000) % 24),
     minutes: Math.floor((diff / 60000) % 60),
+    seconds: Math.floor((diff / 1000) % 60),
   };
 }
 
@@ -236,6 +237,7 @@ export function Hero() {
             <CountUnit value={t.days} label="days" />
             <CountUnit value={t.hours} label="hours" />
             <CountUnit value={t.minutes} label="minutes" />
+            <CountUnit value={t.seconds} label="seconds" />
           </div>
         </motion.div>
 
