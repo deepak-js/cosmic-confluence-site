@@ -5,7 +5,7 @@ import { Magnetic } from "../ui/Magnetic";
 import { useMounted } from "@/lib/useMounted";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
-const TARGET = new Date("2026-12-11T09:00:00+05:30").getTime();
+const TARGET = new Date("2026-12-11T00:00:00+05:30").getTime();
 
 // 60 static particles
 const PARTICLES = Array.from({ length: 60 }).map((_, i) => ({
@@ -59,8 +59,9 @@ function CountUnit({ value, label }: { value: number; label: string }) {
   return (
     <div className="flex-1 px-3 md:px-6">
       <div className="font-display font-bold text-white tabular-nums leading-none flex items-start" style={{ fontSize: "clamp(52px,8vw,96px)" }}>
-        <Digit value={v[0]} />
-        <Digit value={v[1]} />
+        {v.split("").map((digit, index) => (
+          <Digit key={index} value={digit} />
+        ))}
       </div>
       <div className="mt-3 h-px w-10 bg-gradient-to-r from-violet to-cyan" />
       <div className="mt-3 font-mono text-[10px] tracking-[0.3em] uppercase text-tertiary">{label}</div>
@@ -152,18 +153,31 @@ export function Hero() {
       >
         {/* Headline */}
         <h1
-          className="font-display font-black relative inline-block text-left w-full"
-          style={{ fontSize: "clamp(72px,12vw,140px)", letterSpacing: "-0.04em", lineHeight: 0.95 }}
+          className="font-display font-black relative inline-block text-left w-full whitespace-nowrap"
+          style={{ fontSize: "clamp(36px, 11vw, 140px)", letterSpacing: "-0.04em", lineHeight: 0.95 }}
         >
           <span className="text-gradient inline-block">
-            {TITLE.split("").map((ch, i) => (
+            {"PRWC ".split("").map((ch, i) => (
               <motion.span
-                key={i}
+                key={`p-${i}`}
                 initial={{ y: 60, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 1.0 + i * 0.028, duration: 0.7, ease: EASE }}
                 className="inline-block"
                 style={{ whiteSpace: ch === " " ? "pre" : undefined }}
+              >
+                {ch}
+              </motion.span>
+            ))}
+          </span>
+          <span className="text-white inline-block">
+            {"2026".split("").map((ch, i) => (
+              <motion.span
+                key={`n-${i}`}
+                initial={{ y: 60, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 1.0 + (5 + i) * 0.028, duration: 0.7, ease: EASE }}
+                className="inline-block"
               >
                 {ch}
               </motion.span>

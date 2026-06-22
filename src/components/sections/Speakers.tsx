@@ -95,8 +95,8 @@ export function Speakers({ showAll = false }: { showAll?: boolean }) {
       </div>
 
       {/* Horizontal pinned act */}
-      <div ref={wrapRef} className="relative mt-16 h-[90vh] md:h-screen overflow-hidden">
-        <div className="absolute top-6 right-6 z-10 flex items-center gap-3 font-mono text-[10px] tracking-[0.3em] uppercase text-tertiary">
+      <div ref={wrapRef} className="relative mt-16 h-auto md:h-screen md:overflow-hidden overflow-x-auto hide-scrollbar snap-x snap-mandatory">
+        <div className="hidden md:flex absolute top-6 right-6 z-10 items-center gap-3 font-mono text-[10px] tracking-[0.3em] uppercase text-tertiary">
           <span>Scroll →</span>
           <span className="block w-32 h-px bg-white/10 overflow-hidden">
             <span ref={progressRef} className="block h-full origin-left scale-x-0" style={{ background: "linear-gradient(90deg,#E879F9,#22D3EE)" }} />
@@ -105,10 +105,12 @@ export function Speakers({ showAll = false }: { showAll?: boolean }) {
         </div>
         <div
           ref={trackRef}
-          className="absolute left-0 top-1/2 -translate-y-1/2 flex items-center gap-8 px-[10vw] will-change-transform"
+          className="flex md:absolute left-0 top-1/2 md:-translate-y-1/2 items-center gap-6 md:gap-8 px-6 md:px-[10vw] pb-10 md:pb-0 will-change-transform w-max"
         >
           {FEATURED.map((s) => (
-            <FeaturedCard key={s.name} s={s} />
+            <div key={s.name} className="snap-center md:snap-align-none">
+              <FeaturedCard s={s} />
+            </div>
           ))}
         </div>
       </div>

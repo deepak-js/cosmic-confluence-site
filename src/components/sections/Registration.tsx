@@ -7,10 +7,10 @@ import { Check, Loader2 } from "lucide-react";
 import { SectionHeader, Reveal } from "../Reveal";
 
 const TIERS = [
-  { name: "SJU Students", price: "Free", early: "Free", perks: ["Full 2-day access", "Lunch & refreshments", "Conference kit"] },
-  { name: "Other Students", price: "₹500", early: "₹500", perks: ["Full 2-day access", "Lunch & refreshments", "Conference kit"] },
+  { name: "Students of St. Joseph’s University (SJU)", price: "Free", early: "Free", perks: ["Full 2-day access", "Lunch & refreshments", "Conference kit"] },
+  { name: "Students from Other Colleges/Universities", price: "₹500", early: "₹500", perks: ["Full 2-day access", "Lunch & refreshments", "Conference kit"] },
   { name: "Ph.D. Scholars", price: "₹1,000", early: "₹1,000", perks: ["Full 2-day access", "Lunch & refreshments", "Conference kit"] },
-  { name: "Faculty / Academicians", price: "₹1,500", early: "₹1,500", perks: ["Full 2-day access", "Lunch & refreshments", "Proceedings copy"], featured: true },
+  { name: "Faculty Members / Academicians", price: "₹1,500", early: "₹1,500", perks: ["Full 2-day access", "Lunch & refreshments", "Proceedings copy"], featured: true },
   { name: "Industry Professionals", price: "₹2,000", early: "₹2,000", perks: ["Full 2-day access", "Networking lounge", "Sponsor meet-up"] },
 ];
 
